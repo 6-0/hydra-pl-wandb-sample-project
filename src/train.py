@@ -13,7 +13,7 @@ def train(cfg: DictConfig) -> None:
     model = instantiate(cfg.model.instance,cfg=cfg)
 
     dm = DataModule(cfg.data)
-    dm.setup()
+    # dm.setup() # おそらく不要（.fit()時に自動で呼ばれるため）
 
     wandb_logger = instantiate(cfg.logger)
     wandb_logger.watch(model, log='gradients', log_freq=100)
